@@ -29,12 +29,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> listUsers() {
+    public List<User> getAllUsers() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("select u from User u", User.class)
                     .getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Couldn't get list of users", e);
+            throw new RuntimeException("Couldn't get all users", e);
         }
     }
 }
