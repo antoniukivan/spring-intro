@@ -1,20 +1,25 @@
 package spring.intro.controllers;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import spring.intro.dto.UserResponseDto;
 import spring.intro.model.User;
+import spring.intro.service.UserMapperService;
 import spring.intro.service.UserService;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
     private final UserService userService;
+    private final UserMapperService userMapperService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserMapperService userMapperService) {
         this.userService = userService;
+        this.userMapperService = userMapperService;
     }
 
     @GetMapping("/inject")
@@ -25,8 +30,16 @@ public class UserController {
         userService.add(new User("Mike", "mike@mail.com"));
     }
 
-    @GetMapping(value = "/user/{userId}")
-    public UserResponseDto getUserById(@RequestParam(name = "user_id") Long userId) {
-        return userService.getUserById(userId);
+    @GetMapping(value = "/{userId}")
+    public UserResponseDto getUserById(@PathVariable Long userId) {
+        return userMapperService.getDtoFromUser(userService.getUserById(userId));
+    }
+
+    @GetMapping
+    public List<UserResponseDto> getAll() {
+        return userService.listUsers()
+                .stream()
+                .map(userMapperService::getDtoFromUser)
+                .collect(Collectors.toList());
     }
 }

@@ -1,7 +1,6 @@
 package spring.intro.service;
 
 import java.util.List;
-import spring.intro.dto.UserResponseDto;
 import spring.intro.model.User;
 
 public interface UserService {
