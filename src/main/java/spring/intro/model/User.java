@@ -12,6 +12,13 @@ public class User {
     private Long id;
     private String login;
 
+    public User() {
+    }
+
+    public User(String login) {
+        this.login = login;
+    }
+
     public Long getId() {
         return id;
     }
