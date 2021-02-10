@@ -23,5 +23,7 @@ public class UserController {
         userService.add(new User("Mike"));
     }
 
-    public UserResponseDto get(Long userId)
+    public UserResponseDto get(Long userId) {
+
+    }
 }
