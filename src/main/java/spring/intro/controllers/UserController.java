@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import spring.intro.dto.UserResponseDto;
 import spring.intro.model.User;
-import spring.intro.service.UserMapperService;
+import spring.intro.service.UserMapper;
 import spring.intro.service.UserService;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
     private final UserService userService;
-    private final UserMapperService userMapperService;
+    private final UserMapper userMapper;
 
-    public UserController(UserService userService, UserMapperService userMapperService) {
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
-        this.userMapperService = userMapperService;
+        this.userMapper = userMapper;
     }
 
     @GetMapping("/inject")
@@ -32,14 +32,14 @@ public class UserController {
 
     @GetMapping(value = "/{userId}")
     public UserResponseDto getUserById(@PathVariable Long userId) {
-        return userMapperService.getDtoFromUser(userService.getUserById(userId));
+        return userMapper.getDtoFromUser(userService.getById(userId));
     }
 
     @GetMapping
     public List<UserResponseDto> getAll() {
         return userService.listUsers()
                 .stream()
-                .map(userMapperService::getDtoFromUser)
+                .map(userMapper::getDtoFromUser)
                 .collect(Collectors.toList());
     }
 }

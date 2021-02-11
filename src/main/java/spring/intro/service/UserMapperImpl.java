@@ -5,16 +5,11 @@ import spring.intro.dto.UserResponseDto;
 import spring.intro.model.User;
 
 @Service
-public class UserMapperServiceImpl implements UserMapperService {
+public class UserMapperImpl implements UserMapper {
     private final UserService userService;
 
-    public UserMapperServiceImpl(UserService userService) {
+    public UserMapperImpl(UserService userService) {
         this.userService = userService;
-    }
-
-    @Override
-    public User getUserFromDto(UserResponseDto userResponseDto) {
-        return userService.getUserById(userResponseDto.getId());
     }
 
     @Override

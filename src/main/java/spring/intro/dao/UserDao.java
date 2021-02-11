@@ -1,6 +1,7 @@
 package spring.intro.dao;
 
 import java.util.List;
+import java.util.Optional;
 import spring.intro.model.User;
 
 public interface UserDao {
@@ -8,5 +9,5 @@ public interface UserDao {
 
     List<User> getAllUsers();
 
-    User getUserById(Long userId);
+    Optional<User> getById(Long userId);
 }
