@@ -6,12 +6,6 @@ import spring.intro.model.User;
 
 @Service
 public class UserMapperImpl implements UserMapper {
-    private final UserService userService;
-
-    public UserMapperImpl(UserService userService) {
-        this.userService = userService;
-    }
-
     @Override
     public UserResponseDto getDtoFromUser(User user) {
         UserResponseDto userResponseDto = new UserResponseDto();
