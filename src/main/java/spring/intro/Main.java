@@ -12,11 +12,11 @@ public class Main {
 
     public static void main(String[] args) {
         User alex = new User();
-        alex.setLogin("Alex");
+        alex.setName("Alex");
         userService.add(alex);
 
         User bob = new User();
-        bob.setLogin("Bob");
+        bob.setName("Bob");
         userService.add(bob);
 
         userService.listUsers().forEach(System.out::println);
